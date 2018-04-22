@@ -11,6 +11,8 @@ class myPetListScreen extends Component {
     render() {
         return (
           <ScrollView style={{backgroundColor:'#C2B280'}}>
+            <View style={{alignItems:'center'}}><Text style={{fontSize:30,fontWeight:'bold'}}>Select a Pet to Check In:</Text></View>
+
             <List>
               {me.pets.map((pet, index) => (
                 <ListItem

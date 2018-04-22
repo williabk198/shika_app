@@ -4,6 +4,7 @@ import {
   View,
   ScrollView
 } from 'react-native';
+import {Item } from 'native-base';
 import { List, ListItem, Button } from 'react-native-elements';
 import { BigParkUsers } from '../config/data';
 import {goBackTo} from '../config/util';
@@ -17,6 +18,7 @@ class DogListScreen extends Component {
       }
         return (
           <ScrollView style={{backgroundColor:'#C2B280'}}>
+            <View style={{alignItems:'center'}}><Text style={{fontSize:30,fontWeight:'bold'}}>Park Visitors:</Text></View>
             <List>
               {BigParkUsers.map((user,index) => (
                 <ListItem

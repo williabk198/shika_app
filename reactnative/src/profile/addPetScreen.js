@@ -47,7 +47,7 @@ class AddPetScreen extends Component{
             // let source = { uri: 'data:image/jpeg;base64,' + response.data };
     
             this.setState({
-              picture: source
+              picture: response.uri
             });
           }
         });
@@ -60,7 +60,7 @@ class AddPetScreen extends Component{
             <Tile
               imageSrc={{uri: this.state.picture!==''?this.state.picture:'https://www.babybedding.com/images/fabric/silver-gray-minky-fabric_smaller.jpg'}}
               featured
-              title={'Select Photo'}
+              title={this.state.picture!==''?'':'Select Photo'}
               caption=''
               onPress={this.selectPhotoTapped.bind(this)}
             />
@@ -70,29 +70,29 @@ class AddPetScreen extends Component{
                     style={{marginTop:-10}}
                     label='Name'
                     placeholder='Lucky'
-                    onChangeText={(text) => this.setState({text})}
-                    value={this.state.text}
+                    onChangeText={(name) => this.setState({name})}
+                    value={this.state.name}
                 />
                 <Text>Breed:</Text>
                 <TextInput
                     style={{marginTop:-10}}
                     label='Breed'
                     placeholder='Chihuahua'
-                    onChangeText={(text) => this.setState({text})}
-                    value={this.state.text}
+                    onChangeText={(breed) => this.setState({breed})}
+                    value={this.state.breed}
                 />
                 <Text>Sex:</Text>
                 <TextInput
                     style={{marginTop:-10}}
                     label='Sex'
                     placeholder='Boy'
-                    onChangeText={(text) => this.setState({text})}
-                    value={this.state.text}
+                    onChangeText={(sex) => this.setState({sex})}
+                    value={this.state.sex}
                 />
                 <Button
                 title="Add Pet"
                 buttonStyle={{ marginTop: 0, marginBottom:50 }}
-                onPress={()=>{}}
+                onPress={()=>{this.props.navigation.goBack()}}
                 />
             </List>
           </ScrollView>

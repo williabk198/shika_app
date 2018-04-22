@@ -22,7 +22,12 @@ class HomeScreen extends Component{
                     <View style={{flexDirection:'row',justifyContent:'center'}}>
                 <HomeButton 
                     onPress={()=>this.props.navigation.navigate('Profile')}
-                    >Edit Profile</HomeButton>
+                    >Profile</HomeButton>
+                </View>
+                <View style={{flexDirection:'row',justifyContent:'center'}}>
+                <HomeButton 
+                    onPress={()=>console.log('Settings button is not implemented')}
+                    >Settings</HomeButton>
                 </View>
                 <Item><Text>Hours: Monday-Sunday 6:00AM-8:00PM</Text></Item>
                 <View style={{flexDirection:'row',justifyContent:'center'}}>
