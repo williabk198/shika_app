@@ -6,6 +6,7 @@ import CheckInScreen from './src/checkin/checkInScreen'
 import ProfileScreen from './src/profile/profileScreen'
 import DogListScreen from './src/dogList/dogListScreen'
 import MyPetListScreen from './src/dogList/myPetListScreen'
+import AddPetScreen from './src/profile/addPetScreen'
 
 export const Root = StackNavigator({
     Login:{
@@ -38,10 +39,16 @@ export const Root = StackNavigator({
             header:null,
         }
     },
-    MyPetList:{
-        screen:MyPetListScreen,
-    navigationOptions:{
-        header:null,
-    }
-}
+        MyPetList:{
+            screen:MyPetListScreen,
+        navigationOptions:{
+            header:null,
+        }
+    },
+        AddPet:{
+            screen:AddPetScreen,
+            navigationOptions:{
+                header:null,
+            }
+        }
 })

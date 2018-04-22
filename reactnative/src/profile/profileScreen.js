@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Keyboard, Text, Input, Image, Dimensions, ScrollView, StyleSheet} from 'react-native'
+import { View, Keyboard, Text, Image, Dimensions, ScrollView, StyleSheet} from 'react-native'
 import {HomeButton} from '../shared/ui'
 import { Tile, List, ListItem, Button } from 'react-native-elements';
 import { me } from '../config/data';
@@ -55,7 +55,7 @@ class ProfileScreen extends Component{
                             <Button
               title="Add A Pet"
               buttonStyle={{ marginTop: 20, marginBottom:50 }}
-              onPress={this.handleSettingsPress}
+              onPress={()=>this.props.navigation.navigate('AddPet')}
             />
     
             </List>

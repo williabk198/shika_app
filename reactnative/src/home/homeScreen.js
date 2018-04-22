@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View,ScrollView, Keyboard, Text, Input, Image, Dimensions, TouchableHighlight, StyleSheet} from 'react-native'
+import { View,ScrollView, Keyboard, Text,Image, Dimensions, TouchableHighlight, StyleSheet} from 'react-native'
 import {HomeButton} from '../shared/ui'
 import { ListItem, List } from 'react-native-elements';
 import {Item} from 'native-base'

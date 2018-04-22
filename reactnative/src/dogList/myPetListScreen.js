@@ -21,7 +21,7 @@ class myPetListScreen extends Component {
                   hideChevron
                   rightTitle={pet.gender}
                   subtitle={pet.breed}
-                  onPress={() => this.props.navigation.navigate('DogList',{name:{first:me.name.first,last:me.name.last,pet}})}
+                  onPress={() => this.props.navigation.navigate('DogList',{name:{first:me.name.first,last:me.name.last},pet})}
                 />
               ))}
             </List>
