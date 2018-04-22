@@ -3,6 +3,7 @@ import { View, Keyboard, Text, Input, Image, Dimensions, ScrollView, StyleSheet}
 import {HomeButton} from '../shared/ui'
 import { Tile, List, ListItem, Button } from 'react-native-elements';
 import { me } from '../config/data';
+
 const dim = Dimensions.get('window')
 
 class ProfileScreen extends Component{
@@ -10,7 +11,7 @@ class ProfileScreen extends Component{
         return(
             <ScrollView>
             <Tile
-              imageSrc={{ uri: this.props.picture.large}}
+              imageSrc={{ uri: this.props.picture}}
               featured
               title={`${this.props.name.first.toUpperCase()} ${this.props.name.last.toUpperCase()}`}
               caption={this.props.email}
@@ -38,7 +39,7 @@ class ProfileScreen extends Component{
             <List>
               <ListItem
                 title="Username"
-                rightTitle={this.props.login.username}
+                rightTitle={this.props.username}
                 hideChevron
               />
             </List>
@@ -51,18 +52,12 @@ class ProfileScreen extends Component{
                     hideChevron
                   />)
                 })}
-            </List>
-            <List>
-              <ListItem
-                title="Birthday"
-                rightTitle={this.props.dob}
-                hideChevron
-              />
-              <ListItem
-                title="City"
-                rightTitle={this.props.location.city}
-                hideChevron
-              />
+                            <Button
+              title="Add A Pet"
+              buttonStyle={{ marginTop: 20, marginBottom:50 }}
+              onPress={this.handleSettingsPress}
+            />
+    
             </List>
           </ScrollView>
         );

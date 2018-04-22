@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { StackNavigator } from 'react-navigation'
-import  LoginScreen  from './src/login/loginScreen'
+import LoginScreen  from './src/login/loginScreen'
 import HomeScreen from './src/home/homeScreen'
 import CheckInScreen from './src/checkin/checkInScreen'
 import ProfileScreen from './src/profile/profileScreen'
+import DogListScreen from './src/dogList/dogListScreen'
+import MyPetListScreen from './src/dogList/myPetListScreen'
+
 export const Root = StackNavigator({
     Login:{
         screen: LoginScreen,
@@ -13,7 +16,7 @@ export const Root = StackNavigator({
     },
     Home:{
         screen: HomeScreen,
-        navigationoptions:{
+        navigationOptions:{
             header: null
         }
     },
@@ -22,12 +25,23 @@ export const Root = StackNavigator({
         navigationOptions:{
             header:null,
         }
-    }
-/*    CheckIn:{
+    },
+        CheckIn:{
         screen:CheckInScreen,
         navigationOptions:{
-            title:'Check In',
+            header:null,
         },
     },
-*/
+        DogList:{
+            screen:DogListScreen,
+        navigationOptions:{
+            header:null,
+        }
+    },
+    MyPetList:{
+        screen:MyPetListScreen,
+    navigationOptions:{
+        header:null,
+    }
+}
 })

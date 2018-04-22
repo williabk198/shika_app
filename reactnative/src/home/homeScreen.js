@@ -13,7 +13,7 @@ class HomeScreen extends Component{
                 />
                 <View style={{flexDirection:'row',justifyContent:'center'}}>
                 <HomeButton 
-                    onPress={()=>this.props.navigation.navigate('Home')}
+                    onPress={()=>this.props.navigation.navigate('CheckIn')}
                     >Check In</HomeButton></View>
                     <View style={{flexDirection:'row',justifyContent:'center'}}>
                 <HomeButton 
