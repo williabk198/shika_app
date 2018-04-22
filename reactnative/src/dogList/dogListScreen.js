@@ -9,8 +9,12 @@ import { BigParkUsers } from '../config/data';
 
 class DogListScreen extends Component {
     render() {
+      var me = null
+      if (this.props.navigation.state.params){
+         me = this.props.navigation.state.params;
+      }
         return (
-          <ScrollView>
+          <ScrollView style={{backgroundColor:'#C2B280'}}>
             <List>
               {BigParkUsers.map((user) => (
                 <ListItem
@@ -18,10 +22,21 @@ class DogListScreen extends Component {
                   roundAvatar
                   avatar={{ uri: user.pets[0].picture }}
                   title={user.pets[0].name}
+                  hideChevron
+                  rightTitle={user.pets[0].gender}
                   subtitle={`${user.name.first} ${user.name.last}`}
                   onPress={() => {}}
                 />
               ))}
+              {me && me.pet && me.pet.picture &&
+              <ListItem
+                roundAvatar
+                avatar={{ uri: me.pet.picture }}
+                title={me.pet.name}
+                subtitle={`${me.name.first} ${me.name.last}`}
+                onPress={() => {}}
+              />
+              }
             </List>
             <Button
               title="Check In A Pet!"

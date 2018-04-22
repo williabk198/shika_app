@@ -9,7 +9,7 @@ const dim = Dimensions.get('window')
 class ProfileScreen extends Component{
     render(){
         return(
-            <ScrollView>
+            <ScrollView style={{backgroundColor:'#C2B280'}}>
             <Tile
               imageSrc={{ uri: this.props.picture}}
               featured

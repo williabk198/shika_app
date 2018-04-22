@@ -6,7 +6,7 @@ const dim = Dimensions.get('window')
 class CheckInScreen extends Component{
     render(){
         return(
-            <View style={{flex:1, flexDirection:'column', backgroundColor:'black',alignItems:'center'}}>
+            <View style={{flex:1, flexDirection:'column', backgroundColor:'#C2B280',alignItems:'center'}}>
                 <Image 
                     source={require('../images/DogParkTransparent.png')}
                     style={{height:dim.height/4}}resizeMode='contain'
