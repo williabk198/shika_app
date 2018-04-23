@@ -1,8 +1,6 @@
 package controller
 
-import (
-	"net/http"
-)
+import "net/http"
 
 type user struct{}
 

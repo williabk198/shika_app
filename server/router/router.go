@@ -1,9 +1,10 @@
 package router
 
 import (
-	"shika_app/server/controller"
+	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/williabk198/shika_app/server/controller"
 )
 
 func init() {
@@ -15,4 +16,6 @@ func init() {
 
 	router.HandleFunc("/dog/{dogKey}", controller.Dog.Get).Methods("GET")
 	router.HandleFunc("/dog", controller.Dog.Post).Methods("POST")
+
+	http.Handle("/", router)
 }
