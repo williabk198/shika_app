@@ -4,17 +4,18 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  AppRegistry,
-} from 'react-native';
-import {Root} from './routes'
+import React, { Component } from 'react'
+import { Text, View, AppRegistry } from 'react-native'
+import { persistStore, autoRehydrate } from 'redux-persist'
+import { Root } from './routes'
 
 class App extends Component {
-  render() {
-    return <Root />;
+  render () {
+    return (
+      <Provider store={store}>
+        <Root />
+      </Provider>
+    )
   }
 }
 
