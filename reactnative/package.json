@@ -13,9 +13,11 @@
     "react-native-elements": "^0.19.1",
     "react-native-facebook-login": "^1.6.1",
     "react-native-image-picker": "^0.26.7",
+    "react-native-maps": "^0.21.0",
     "react-navigation": "^1.5.11",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
+    "redux-persist": "^4.9.1",
     "store": "^2.0.12"
   },
   "devDependencies": {
