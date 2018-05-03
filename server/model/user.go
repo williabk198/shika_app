@@ -11,6 +11,7 @@ import (
 //User holds the information that of the person visiting the dog park
 type User struct {
 	Name        string    `json:"name,omitempty"`
+	Email       string    `json:"email,omitempty"`
 	ImgURL      string    `json:"image,omitempty"`
 	Dogs        []string  `json:"dogs,omitempty"`
 	CheckedIn   bool      `json:"checked-in"`

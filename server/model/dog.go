@@ -8,7 +8,8 @@ import (
 //Dog holds all the information in regards to a users pet
 type Dog struct {
 	Name      string `json:"name,omitempty"`
-	Breed     string `json:"breedd,omitempty"`
+	Breed     string `json:"breed,omitempty"`
+	Sex       string `json:"sex,omitempty"`
 	ImageURL  string `json:"image-url,omitempty"`
 	CheckedIn bool   `json:"checked-in"`
 }

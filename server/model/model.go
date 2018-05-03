@@ -2,7 +2,6 @@ package model
 
 import (
 	"log"
-	"os"
 
 	"firebase.google.com/go/db"
 
@@ -20,11 +19,7 @@ func init() {
 	conf := &firebase.Config{
 		DatabaseURL: "https://shika-app.firebaseio.com/",
 	}
-	wd, err := os.Getwd() // Get the working directory
-	if err != nil {
-		log.Println("Could not get current working directory")
-	}
-	opt := option.WithCredentialsFile(wd + "/../creds/firebase-adminsdk.json")
+	opt := option.WithCredentialsFile("../creds/firebase-adminsdk.json")
 	app, err := firebase.NewApp(ctx, conf, opt)
 	if err != nil {
 		log.Printf("Could not initialize Firebase App: %v", err)
