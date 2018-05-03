@@ -5,7 +5,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"log"
 )
@@ -62,8 +61,6 @@ func checkAPIKey(appName, key string) error {
 			hasher := sha256.New()
 			hasher.Write([]byte(key + creds.Salt))
 			hash := hex.EncodeToString(hasher.Sum(nil))
-
-			fmt.Printf("%s\n%s\n\n", hash, appKey.Key)
 
 			if hash == appKey.Key {
 				return nil
