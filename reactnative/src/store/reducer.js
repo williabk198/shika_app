@@ -3,7 +3,6 @@ import { REFRESH_VISITORS, UPDATE_PROFILE, LOADING } from './type'
 const INITIAL_STATE = {
   loading: false,
   user: {
-    userName: 'TDLehman',
     name: {
       first: 'Tylor',
       last: 'Lehman'
@@ -11,13 +10,12 @@ const INITIAL_STATE = {
     pets: {
       Rowan: {
         gender: 'female',
-        type: 'dog',
         breed: 'Poodle',
+        sex: 'male',
         picture: 'https://goo.gl/1XLUvu'
       },
       Luna: {
-        gender: 'female',
-        type: 'dog',
+        sex: 'male',
         breed: 'Husky',
         picture:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyyjpGh-VvqkHz1B9zEZriqZaNm3GAw3DB3b1iP2wvMkvJ47XH'
