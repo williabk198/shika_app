@@ -3,12 +3,21 @@ import { View, Keyboard, Text, Image, Dimensions, StyleSheet } from 'react-nativ
 import { TextButton, Input } from '../shared/ui'
 import PropTypes from 'prop-types'
 import firebase from '../firebase'
+import { FBLogin } from 'react-native-facebook-login'
+
+var { FBLoginManager } = require('react-native-facebook-login')
+
+FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Web)
 
 const dim = Dimensions.get('window')
 
 class LoginScreen extends Component {
   state = { email: '', password: '', error: '', loading: false, keyboard: false }
+  _loginFB = this._loginFB.bind(this)
+
   componentDidMount () {
+    this.usersRef = firebase.database().ref('users')
+
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       this._keyboardDidShow.bind(this)
@@ -53,6 +62,17 @@ class LoginScreen extends Component {
       })
   }
 
+  _loginFB () {
+    FBLoginManager.loginWithPermissions([ 'email' ], function (error, data) {
+      if (!error) {
+        console.log('Login data: ', data)
+        this.onLoginSuccess.bind(this)
+      } else {
+        console.log('Error: ', error)
+      }
+    })
+  }
+
   onLoginFail () {
     console.log('Login failed: ' + error)
     this.setState({
@@ -64,6 +84,7 @@ class LoginScreen extends Component {
   }
 
   onLoginSuccess () {
+    console.log(data)
     this.setState({
       email: '',
       password: '',
@@ -108,6 +129,9 @@ class LoginScreen extends Component {
           <TextButton style={styles.buttonStyle} onPress={() => this._login()}>
             Sign in
           </TextButton>
+          <TextButton style={styles.buttonStyle} onPress={() => this._loginFB.bind(this)}>
+            Sign in with Google
+          </TextButton>
         </View>
       </View>
     )
@@ -137,3 +161,26 @@ export default LoginScreen
       }
     })
 */
+
+/*this.usersRef.child('TDLehman').set({
+      first: 'Tylor',
+      last: 'Lehman',
+      email: 'tylorlehman@yahoo.com',
+      picture:
+        'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/18300856_10158622940770501_5648116858537953429_n.jpg?_nc_cat=0&oh=23eec98564f63511ec31ae0f84751e8e&oe=5B67F1CF',
+      pets: [
+        {
+          name: 'Rowan',
+          gender: 'female',
+          breed: 'Poodle',
+          picture: 'https://goo.gl/1XLUvu'
+        },
+        {
+          name: 'Luna',
+          picture:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyyjpGh-VvqkHz1B9zEZriqZaNm3GAw3DB3b1iP2wvMkvJ47XH',
+          gender: 'female',
+          breed: 'Husky'
+        }
+      ]
+    })*/
