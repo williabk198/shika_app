@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { REFRESH_VISITORS, UPDATE_PROFILE, LOADING } from './types'
+import { REFRESH_VISITORS, UPDATE_PROFILE, LOADING } from './type'
 
 export const refreshVisitors = () => {
   return async (dispatch) => {
@@ -14,7 +14,7 @@ export const refreshVisitors = () => {
   }
 }
 
-export const updateProfile = (profile) => {
+export const updateUser = (user) => {
   return async (dispatch) => {
     dispatch({ type: LOADING })
     try {
