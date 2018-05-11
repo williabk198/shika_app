@@ -18,16 +18,16 @@ class ProfileScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      first: '',
-      last: '',
-      picture: '',
-      email: '',
-      pets: [ { name: '', breed: '' } ]
+      first: 'First',
+      last: 'Last',
+      picture: 'http://via.placeholder.com/350x350?text=Image',
+      email: 'Email',
+      pets: [ { name: 'petName', breed: 'Breed' } ]
     }
   }
-
   componentDidMount () {
-    this.state = this.props.user
+    const user = this.props.user ? this.props.user : ''
+    this.props.user && this.setState({ user })
   }
   render () {
     return (
@@ -44,7 +44,7 @@ class ProfileScreen extends Component {
           <ListItem title='Email' rightTitle={this.state.email} hideChevron />
         </List>
         <List>
-          <Text style={{ weight: 'bold' }}>Pets</Text>
+          <Text style={{ fontWeight: 'bold' }}>Pets</Text>
           {this.state.pets.map((pet, index) => {
             return (
               <ListItem key={index} title={pet.name} rightTitle={pet.breed} hideChevron />
@@ -55,12 +55,15 @@ class ProfileScreen extends Component {
             buttonStyle={{ marginTop: 20, marginBottom: 50 }}
             onPress={() => this.props.navigation.navigate('AddPet')}
           />
+          <Button
+            title='Save Changes'
+            buttonStyle={{ marginTop: 20, marginBottom: 50 }}
+            onPress={() => {}}
+          />
         </List>
       </ScrollView>
     )
   }
 }
-
-ProfileScreen.defaultProps = { ...me }
 
 export default ProfileScreen
