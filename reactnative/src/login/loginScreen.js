@@ -73,6 +73,8 @@ class LoginScreen extends Component {
     })
   }
 
+  _loginGoogle () {}
+
   onLoginFail () {
     console.log('Login failed: ' + error)
     this.setState({
@@ -129,8 +131,9 @@ class LoginScreen extends Component {
           <TextButton style={styles.buttonStyle} onPress={() => this._login()}>
             Sign in
           </TextButton>
-          <TextButton style={styles.buttonStyle} onPress={() => this._loginFB.bind(this)}>
-            Sign in with Google
+
+          <TextButton style={styles.buttonStyle} onPress={() => this._loginFB()}>
+            Sign in with Facebook
           </TextButton>
         </View>
       </View>

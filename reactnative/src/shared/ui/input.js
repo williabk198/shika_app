@@ -24,8 +24,8 @@ export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry
         autoCorrect={false}
         style={{
           color: '#000',
-          paddingRight: 5,
-          paddingLeft: 1,
+          paddingRight: 15,
+          paddingLeft: 15,
           fontSize: 15,
           lineHeight: 23,
           width: dim.width

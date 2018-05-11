@@ -14,7 +14,7 @@ import { Root } from './routes'
 import { reducer } from './src/store/reducer'
 
 const store = createStore(reducer, undefined, autoRehydrate())
-
+console.ignoredYellowBox = [ 'Setting a timer' ] // TODO Find correct solution instead of ignoring warning
 persistStore(store, { storage: AsyncStorage })
 
 class App extends Component {
