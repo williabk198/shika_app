@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StackNavigator } from 'react-navigation'
-import LoginScreen from './src/login/loginScreen'
+import { LoginScreen } from './src/login/loginScreen'
 import HomeScreen from './src/home/homeScreen'
 import CheckInScreen from './src/checkin/checkInScreen'
 import { ProfileScreen } from './src/profile/profileScreen'

@@ -1,18 +1,26 @@
 import React, { Component } from 'react'
 import { View, Keyboard, Text, Image, Dimensions, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
 import { TextButton, Input } from '../shared/ui'
 import toast from '../shared/toast'
 import PropTypes from 'prop-types'
 import firebase from '../firebase'
 import { FBLogin } from 'react-native-facebook-login'
-
+import { updateUser } from '../store/actions'
 var { FBLoginManager } = require('react-native-facebook-login')
 
 FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Web)
 
 const dim = Dimensions.get('window')
 
-class LoginScreen extends Component {
+const mapStateToProps = (state) => {
+  user = state.user
+  return {
+    user
+  }
+}
+
+class Login extends Component {
   state = { email: '', password: '', error: '', loading: false, keyboard: false }
   _loginFB = this._loginFB.bind(this)
 
@@ -69,14 +77,16 @@ class LoginScreen extends Component {
   }
 
   _loginFB () {
-    FBLoginManager.loginWithPermissions([ 'email' ], function (error, data) {
-      if (!error) {
-        console.log('Login data: ', data)
-        this.onLoginSuccess.bind(this)
-      } else {
-        console.log('Error: ', error)
+    FBLoginManager.loginWithPermissions(
+      [ 'email', 'public_profile', 'user_photos' ],
+      function (error, data) {
+        if (!error) {
+          console.log('Login data: ', data)
+        } else {
+          console.log('Error: ', error)
+        }
       }
-    })
+    )
   }
 
   _loginGoogle () {}
@@ -165,7 +175,7 @@ const styles = StyleSheet.create({
   buttonStyle: {}
 })
 
-export default LoginScreen
+export const LoginScreen = connect(mapStateToProps, { updateUser })(Login)
 
 /*var { FBLoginManager } = require('react-native-facebook-login')
 //FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.Web) // defaults to Native
