@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Keyboard, Text, Image, Dimensions, StyleSheet } from 'react-native'
 import { TextButton, Input } from '../shared/ui'
+import toast from '../shared/toast'
 import PropTypes from 'prop-types'
 import firebase from '../firebase'
 import { FBLogin } from 'react-native-facebook-login'
@@ -43,6 +44,7 @@ class LoginScreen extends Component {
 
   _login () {
     const { email, password } = this.state
+
     this.setState({ error: '', loading: true })
     firebase
       .auth()
@@ -56,7 +58,8 @@ class LoginScreen extends Component {
           .createUserWithEmailAndPassword(email, password)
           .then(this.onLoginSuccess.bind(this))
           .catch((error) => {
-            console.log('Create user error:' + error)
+            console.log('Create user error:' + error + ' ' + email + ' ' + password)
+            toast.Error('error: ' + error)
             this.onLoginFail.bind(this)
           })
       })
@@ -86,7 +89,6 @@ class LoginScreen extends Component {
   }
 
   onLoginSuccess () {
-    console.log(data)
     this.setState({
       email: '',
       password: '',
@@ -95,6 +97,7 @@ class LoginScreen extends Component {
     })
     this.props.navigation.navigate('Home')
   }
+
   render () {
     return (
       <View
@@ -102,7 +105,8 @@ class LoginScreen extends Component {
           flex: 1,
           flexDirection: 'column',
           backgroundColor: '#C2B280',
-          alignItems: 'center'
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         {!this.state.keyboard && (
@@ -112,27 +116,40 @@ class LoginScreen extends Component {
             resizeMode='contain'
           />
         )}
-        <Input
-          placeholder='user@email.com'
-          label='Email: '
-          value={this.state.email}
-          onChangeText={(email) => this.setState({ email })}
-        />
-        <Input
-          secureTextEntry
-          placeholder='password'
-          label='Password: '
-          value={this.state.password}
-          onChangeText={(password) => this.setState({ password })}
-        />
         <View
-          style={{ width: dim.width, flexDirection: 'row', justifyContent: 'center' }}
+          style={{
+            flex: 1,
+            width: dim.width * 2 / 3,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
         >
-          <TextButton style={styles.buttonStyle} onPress={() => this._login()}>
+          <Input
+            placeholder='user@email.com'
+            label='Email: '
+            value={this.state.email}
+            onChangeText={(email) => this.setState({ email })}
+          />
+          <Input
+            secureTextEntry
+            placeholder='password'
+            label='Password: '
+            value={this.state.password}
+            onChangeText={(password) => this.setState({ password })}
+          />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <TextButton style={{}} onPress={() => this._login()}>
             Sign in
           </TextButton>
 
-          <TextButton style={styles.buttonStyle} onPress={() => this._loginFB()}>
+          <TextButton style={{}} onPress={() => this._loginFB()}>
             Sign in with Facebook
           </TextButton>
         </View>
@@ -142,10 +159,7 @@ class LoginScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  buttonStyle: {
-    padding: 50,
-    margin: 50
-  }
+  buttonStyle: {}
 })
 
 export default LoginScreen

@@ -6,12 +6,15 @@ import PropTypes from 'prop-types'
 export const TextButton = ({ children, onPress, style }) => (
   <Button
     onPress={onPress}
-    style={{
-      width: 200,
-      marginBottom: 10,
-      backgroundColor: '#334477',
-      justifyContent: 'center'
-    }}
+    style={[
+      {
+        width: 200,
+        marginBottom: 10,
+        backgroundColor: '#334477',
+        justifyContent: 'center'
+      },
+      style
+    ]}
   >
     <Text style={{ color: 'white', fontWeight: 'bold' }}>{children}</Text>
   </Button>
