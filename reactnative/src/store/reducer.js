@@ -46,6 +46,7 @@ const INITIAL_STATE = {
 }
 
 export const reducer = (state = INITIAL_STATE, { type, payload }) => {
+  console.log('in reducer')
   switch (type) {
     case LOADING:
       return { ...state, loading: true }

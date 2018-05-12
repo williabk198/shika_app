@@ -11,10 +11,9 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { Root } from 'native-base'
 import { Shika } from './routes'
-
+import {store } from './store'
 import { reducer } from './src/store/reducer'
 
-const store = createStore(reducer, undefined, autoRehydrate())
 
 console.ignoredYellowBox = [ 'Setting a timer' ] // TODO Find correct solution instead of ignoring warning
 persistStore(store, { storage: AsyncStorage })

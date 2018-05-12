@@ -14,14 +14,20 @@ export const refreshVisitors = () => {
   }
 }
 
+export const loading = () =>  {
+  console.log('loading')
+  return({type:LOADING})}
+
 export const updateUser = (user) => {
+  console.log('should be updating user')
   return async (dispatch) => {
     dispatch({ type: LOADING })
+    delete user.picture
+    dispatch({ type: UPDATE_PROFILE, payload: user })
     try {
-      const response = await api.profile.get(profile)
+      //update firebase here. Should actually be before profile stuff
     } catch (error) {
       console.log(`error updating profile: ${error.message}`)
-      dispatch({ type: UPDATE_PROFILE, payload: { profile } })
     }
   }
 }
