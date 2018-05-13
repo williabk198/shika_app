@@ -1,12 +1,11 @@
 package model
 
 import (
-	"firebase.google.com/go/db"
 	"golang.org/x/net/context"
 )
 
 type DogInterface interface {
-	Add(*Dog) (*db.Ref, error)
+	Add(*Dog) (string, error)
 	Get(string) (*Dog, error)
 }
 
@@ -23,17 +22,17 @@ type dogInterface struct{ DogInterface }
 
 //Add inserts a the dog into Firebase and associates
 //it to the given owner via the userKey.
-func (di dogInterface) Add(d *Dog) (*db.Ref, error) {
+func (di dogInterface) Add(d *Dog) (string, error) {
 	ctx := context.Background()
 	ref := client.NewRef("dogs")
 
 	respRef, err := ref.Push(ctx, d)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	d.ID = respRef.Key
 
-	return respRef, nil
+	return respRef.Key, nil
 }
 
 func (di dogInterface) Get(dogKey string) (*Dog, error) {

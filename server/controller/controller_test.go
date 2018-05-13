@@ -1,6 +1,20 @@
 package controller
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/williabk198/shika_app/server/model"
+)
+
+func TestMain(m *testing.M) {
+
+	model.Dogs = testDogInterface{}
+	model.Users = testUserInterface{}
+	model.Events = testEventInterface{}
+	model.Visitors = testVisitorInterface{}
+
+	m.Run()
+}
 
 func TestAPICheck(t *testing.T) {
 

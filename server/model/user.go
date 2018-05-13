@@ -3,12 +3,11 @@ package model
 import (
 	"fmt"
 
-	"firebase.google.com/go/db"
 	"golang.org/x/net/context"
 )
 
 type UserInterface interface {
-	Add(*User) (*db.Ref, error)
+	Add(*User) (string, error)
 	AddDog(string, string) error
 	Get(string) (*User, error)
 }
@@ -25,17 +24,17 @@ type User struct {
 type userInterface struct{ UserInterface }
 
 //Add inserts the user into Firebase
-func (ui userInterface) Add(u *User) (*db.Ref, error) {
+func (ui userInterface) Add(u *User) (string, error) {
 	ctx := context.Background()
 	ref := client.NewRef("users")
 
 	respRef, err := ref.Push(ctx, u)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	u.ID = respRef.Key
 
-	return respRef, nil
+	return respRef.Key, nil
 }
 
 //AddDogKey adds a key associated to Dog already existing in Firebase

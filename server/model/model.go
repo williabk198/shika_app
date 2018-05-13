@@ -11,6 +11,11 @@ import (
 )
 
 var (
+	Users    UserInterface    = userInterface{}
+	Dogs     DogInterface     = dogInterface{}
+	Events   EventInterface   = eventInterface{}
+	Visitors VisitorInterface = visitorInterface{}
+
 	client *db.Client
 )
 

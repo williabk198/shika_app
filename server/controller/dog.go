@@ -4,7 +4,7 @@ import "net/http"
 
 type dog struct{}
 
-func (d dog) VerifiedGet(w http.ResponseWriter, r *http.Request) {
+func (d dog) Get(w http.ResponseWriter, r *http.Request) {
 	//TODO: Verify that Shika app is send the request and
 	//write the information for the desired dog
 	w.WriteHeader(http.StatusNotImplemented)

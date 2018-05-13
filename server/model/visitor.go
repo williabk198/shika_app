@@ -1,12 +1,11 @@
 package model
 
 import (
-	"firebase.google.com/go/db"
 	"golang.org/x/net/context"
 )
 
 type VisitorInterface interface {
-	Add(*Visitor) (*db.Ref, error)
+	Add(*Visitor) (string, error)
 	Remove(string) error
 }
 
@@ -26,17 +25,17 @@ type visitorInterface struct{ VisitorInterface }
 //Add inserts a visitor and his/her dog(s) into Firebase.
 //The user visiting must alread exist in Firebase along
 //with the users dog(s)
-func (vi visitorInterface) Add(v *Visitor) (*db.Ref, error) {
+func (vi visitorInterface) Add(v *Visitor) (string, error) {
 	ctx := context.Background()
 	ref := client.NewRef("visitors")
 
 	respRef, err := ref.Push(ctx, v)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	v.ID = respRef.Key
 
-	return respRef, nil
+	return respRef.Key, nil
 }
 
 //Remove deletes the visitor from Firebase

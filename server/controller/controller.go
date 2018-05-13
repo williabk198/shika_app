@@ -19,9 +19,11 @@ type credentials struct {
 
 var (
 	//User holds the controller for the user
-	User user
+	User = user{}
 	//Dog hold the controller for the dog
-	Dog dog
+	Dog     = dog{}
+	Event   = event{}
+	Visitor = visitor{}
 
 	creds credentials
 
@@ -30,8 +32,6 @@ var (
 )
 
 func init() {
-	User = user{}
-	Dog = dog{}
 
 	jsonFile, err := ioutil.ReadFile("../creds/api_keys.json")
 	if err != nil {

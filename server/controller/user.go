@@ -4,7 +4,7 @@ import "net/http"
 
 type user struct{}
 
-func (u user) VerifiedGet(w http.ResponseWriter, r *http.Request) {
+func (u user) Get(w http.ResponseWriter, r *http.Request) {
 	//TODO: Verify that Shika app is send the request and
 	//write the information for the desired user
 	w.WriteHeader(http.StatusNotImplemented)
