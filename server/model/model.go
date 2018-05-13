@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	ref *db.Ref
+	client *db.Client
 )
 
 func init() {
@@ -24,10 +24,8 @@ func init() {
 	if err != nil {
 		log.Printf("Could not initialize Firebase App: %v", err)
 	}
-	dbClient, err := app.Database(ctx)
+	client, err = app.Database(ctx)
 	if err != nil {
 		log.Printf("Could not initialize database client: %v", err)
 	}
-
-	ref = dbClient.NewRef("")
 }

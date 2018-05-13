@@ -7,6 +7,12 @@ import (
 	"golang.org/x/net/context"
 )
 
+type UserInterface interface {
+	Add(*User) (*db.Ref, error)
+	AddDog(string, string) error
+	Get(string) (*User, error)
+}
+
 //User holds the information that of the person visiting the dog park
 type User struct {
 	ID     string   `json:"-"`
@@ -16,11 +22,14 @@ type User struct {
 	Dogs   []string `json:"dogs,omitempty"`
 }
 
-//Add inserts the user into Firebase
-func (u *User) Add() (*db.Ref, error) {
-	ctx := context.Background()
+type userInterface struct{ UserInterface }
 
-	respRef, err := ref.Child("users").Push(ctx, u)
+//Add inserts the user into Firebase
+func (ui userInterface) Add(u *User) (*db.Ref, error) {
+	ctx := context.Background()
+	ref := client.NewRef("users")
+
+	respRef, err := ref.Push(ctx, u)
 	if err != nil {
 		return nil, err
 	}
@@ -31,15 +40,24 @@ func (u *User) Add() (*db.Ref, error) {
 
 //AddDogKey adds a key associated to Dog already existing in Firebase
 //and updates the user.
-func (u *User) AddDogKey(dogKey string) error {
+func (ui userInterface) AddDogKey(userKey, dogKey string) error {
 	ctx := context.Background()
+	ref := client.NewRef("")
+
+	user, err := ui.Get(userKey)
+	if err != nil {
+		return fmt.Errorf(
+			"Error could not retrieve user with ID %s\n%v",
+			userKey, err,
+		)
+	}
 
 	result, err := ref.Child("dogs").OrderByKey().
 		EqualTo(dogKey).GetOrdered(ctx)
 
 	if err != nil {
 		return fmt.Errorf("Error attempting to check if dog "+
-			"exists in database\n%v", err)
+			"exists in the database\n%v", err)
 	}
 	if len(result) == 0 {
 		//TODO: Make this error into its own type
@@ -47,12 +65,25 @@ func (u *User) AddDogKey(dogKey string) error {
 			"The dog does not exist in the database")
 	}
 
-	u.Dogs = append(u.Dogs, result[0].Key())
+	user.Dogs = append(user.Dogs, result[0].Key())
 
-	uMap := map[string]interface{}{u.ID: u}
+	uMap := map[string]interface{}{userKey: user}
 	err = ref.Child("users").Update(ctx, uMap)
 	if err != nil {
 		return err
 	}
 	return nil
+}
+
+func (ui userInterface) Get(userKey string) (*User, error) {
+	ctx := context.Background()
+	ref := client.NewRef("users")
+
+	user := new(User)
+	err := ref.Get(ctx, user)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }

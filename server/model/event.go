@@ -7,6 +7,10 @@ import (
 	"golang.org/x/net/context"
 )
 
+type EventInterface interface {
+	Add(*Event) (*db.Ref, error)
+}
+
 //Event holds all the necissary information for a particular event
 type Event struct {
 	ID        string   `json:"-"`
@@ -17,12 +21,15 @@ type Event struct {
 	TimeEnd   []string `json:"time-end,omitempty"`
 }
 
+type eventInterface struct{ EventInterface }
+
 //Add insert the event into Firebase. If it is unable to then it
 //returns an error.
-func (e *Event) Add() (*db.Ref, error) {
+func (ei eventInterface) Add(e *Event) (*db.Ref, error) {
 	ctx := context.Background()
+	ref := client.NewRef("events")
 
-	respRef, err := ref.Child("events").Push(ctx, e)
+	respRef, err := ref.Push(ctx, e)
 	if err != nil {
 		return nil, fmt.Errorf("Error occured while attempting to add the event\n%v", err)
 	}

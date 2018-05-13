@@ -5,6 +5,11 @@ import (
 	"golang.org/x/net/context"
 )
 
+type VisitorInterface interface {
+	Add(*Visitor) (*db.Ref, error)
+	Remove(string) error
+}
+
 //Visitor holds which user and which dog(s)
 //the user has checked in along with the area
 //that the user checked in to.
@@ -16,13 +21,16 @@ type Visitor struct {
 	ParkArea    string   `json:"park-area"`
 }
 
+type visitorInterface struct{ VisitorInterface }
+
 //Add inserts a visitor and his/her dog(s) into Firebase.
 //The user visiting must alread exist in Firebase along
 //with the users dog(s)
-func (v *Visitor) Add() (*db.Ref, error) {
+func (vi visitorInterface) Add(v *Visitor) (*db.Ref, error) {
 	ctx := context.Background()
+	ref := client.NewRef("visitors")
 
-	respRef, err := ref.Child("visitors").Push(ctx, v)
+	respRef, err := ref.Push(ctx, v)
 	if err != nil {
 		return nil, err
 	}
@@ -32,10 +40,11 @@ func (v *Visitor) Add() (*db.Ref, error) {
 }
 
 //Remove deletes the visitor from Firebase
-func (v *Visitor) Remove() error {
+func (vi visitorInterface) Remove(vID string) error {
 	ctx := context.Background()
+	ref := client.NewRef("visitors")
 
-	err := ref.Child("visitors/" + v.ID).Delete(ctx)
+	err := ref.Child(vID).Delete(ctx)
 	if err != nil {
 		return err
 	}
