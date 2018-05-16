@@ -23,7 +23,7 @@ func init() {
 	conf := &firebase.Config{
 		DatabaseURL: "https://shika-app.firebaseio.com/",
 	}
-	opt := option.WithCredentialsFile("../creds/firebase-adminsdk.json")
+	opt := option.WithCredentialsFile("./creds/firebase-adminsdk.json")
 	app, err := firebase.NewApp(ctx, conf, opt)
 	if err != nil {
 		log.Printf("Could not initialize Firebase App: %v", err)

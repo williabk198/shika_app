@@ -36,7 +36,7 @@ var (
 
 func init() {
 
-	jsonFile, err := ioutil.ReadFile("../creds/api_keys.json")
+	jsonFile, err := ioutil.ReadFile("./creds/api_keys.json")
 	if err != nil {
 		log.Printf(
 			"Could not access API Key information\n%v",
