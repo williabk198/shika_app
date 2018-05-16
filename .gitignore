@@ -1,5 +1,6 @@
 
 creds/
+reactnative/src/firebase.js
 
 # Created by https://www.gitignore.io/api/go,linux,windows,visualstudiocode
 
