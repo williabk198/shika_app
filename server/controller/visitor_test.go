@@ -5,15 +5,16 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/williabk198/shika_app/server/db"
 	"github.com/williabk198/shika_app/server/model"
 )
 
-type testVisitorInterface struct{ model.VisitorInterface }
+type testVisitorImpl struct{ db.VisitorInterface }
 
-func (tvi testVisitorInterface) Add(v *model.Visitor) (string, error) {
+func (tvi testVisitorImpl) Add(v *model.Visitor) (string, error) {
 	return "67890123", nil
 }
-func (tvi testVisitorInterface) Remove(s string) error {
+func (tvi testVisitorImpl) Remove(s string) error {
 	return nil
 }
 

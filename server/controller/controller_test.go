@@ -3,20 +3,15 @@ package controller
 import (
 	"testing"
 
-	"github.com/williabk198/shika_app/server/model"
+	"github.com/williabk198/shika_app/server/db"
 )
 
 func TestMain(m *testing.M) {
 
-	model.Dogs = testDogInterface{}
-	model.Users = testUserInterface{}
-	model.Events = testEventInterface{}
-	model.Visitors = testVisitorInterface{}
-
-	m.Run()
-}
-
-func TestAPICheck(t *testing.T) {
+	db.Dogs = testDogImpl{}
+	db.Users = testUserImpl{}
+	db.Events = testEventImpl{}
+	db.Visitors = testVisitorImpl{}
 
 	testApp := struct {
 		Name string
@@ -28,6 +23,11 @@ func TestAPICheck(t *testing.T) {
 
 	creds.AllowedApps = append(creds.AllowedApps, testApp)
 	creds.Salt = "76543210"
+
+	m.Run()
+}
+
+func TestAPICheck(t *testing.T) {
 
 	err := checkAPIKey("test", "01234567")
 	if err == nil {

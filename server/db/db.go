@@ -1,20 +1,19 @@
-package model
+package db
 
 import (
+	"context"
 	"log"
 
+	firebase "firebase.google.com/go"
 	"firebase.google.com/go/db"
-
-	"firebase.google.com/go"
-	"golang.org/x/net/context"
 	"google.golang.org/api/option"
 )
 
 var (
-	Users    UserInterface    = userInterface{}
-	Dogs     DogInterface     = dogInterface{}
-	Events   EventInterface   = eventInterface{}
-	Visitors VisitorInterface = visitorInterface{}
+	Users    UserInterface
+	Dogs     DogInterface
+	Events   EventInterface
+	Visitors VisitorInterface
 
 	client *db.Client
 )

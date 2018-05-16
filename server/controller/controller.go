@@ -7,6 +7,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"log"
+	"strings"
 )
 
 type credentials struct {
@@ -18,17 +19,19 @@ type credentials struct {
 }
 
 var (
-	//User holds the controller for the user
+	//User holds the controller for the user API endpoint
 	User = user{}
-	//Dog hold the controller for the dog
-	Dog     = dog{}
-	Event   = event{}
+	//Dog holds the controller for the dog API endpoint
+	Dog = dog{}
+	//Event holds the controller for the event API endpoint
+	Event = event{}
+	//Visitor holds rhw controller fort the visitor API endpoint
 	Visitor = visitor{}
 
 	creds credentials
 
-	errAppDisallowed = errors.New("The application is not permitted to access this API")
-	errBadKey        = errors.New("The appilication did not give the correct key")
+	errAppDisallowed error
+	errBadKey        error
 )
 
 func init() {
@@ -52,6 +55,9 @@ func init() {
 
 func checkAPIKey(appName, key string) error {
 
+	errAppDisallowed = errors.New("The \"" + appName + "\" application is not permitted to access this API")
+	errBadKey = errors.New("The \"" + appName + "\" appilication did not give the correct key")
+
 	var appFound bool
 
 	for _, appKey := range creds.AllowedApps {
@@ -73,4 +79,12 @@ func checkAPIKey(appName, key string) error {
 	}
 
 	return errAppDisallowed
+}
+
+func getAppNameAndKey(authHeader string) (string, string) {
+	spaceIndex := strings.Index(authHeader, " ")
+	appName := authHeader[0:spaceIndex]
+	apiKey := authHeader[spaceIndex+1 : len(authHeader)]
+
+	return appName, apiKey
 }

@@ -5,15 +5,16 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/williabk198/shika_app/server/db"
 	"github.com/williabk198/shika_app/server/model"
 )
 
-type testUserInterface struct{ model.UserInterface }
+type testUserImpl struct{ db.UserInterface }
 
-func (tui testUserInterface) Add(u *model.User) (string, error) {
+func (tui testUserImpl) Add(u *model.User) (string, error) {
 	return "89012345", nil
 }
-func (tui testUserInterface) Get(key string) (*model.User, error) {
+func (tui testUserImpl) Get(key string) (*model.User, error) {
 	return new(model.User), nil
 }
 

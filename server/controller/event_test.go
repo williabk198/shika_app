@@ -5,12 +5,13 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/williabk198/shika_app/server/db"
 	"github.com/williabk198/shika_app/server/model"
 )
 
-type testEventInterface struct{ model.EventInterface }
+type testEventImpl struct{ db.EventInterface }
 
-func (tei testEventInterface) Add(e *model.Event) (string, error) {
+func (tei testEventImpl) Add(e *model.Event) (string, error) {
 	return "45678901", nil
 }
 
