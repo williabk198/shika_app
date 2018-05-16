@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { REFRESH_VISITORS, UPDATE_PROFILE, LOADING } from './types'
+import { REFRESH_VISITORS, UPDATE_PROFILE, LOADING } from './type'
 
 export const refreshVisitors = () => {
   return async (dispatch) => {
@@ -14,14 +14,20 @@ export const refreshVisitors = () => {
   }
 }
 
-export const updateProfile = (profile) => {
+export const loading = () =>  {
+  console.log('loading')
+  return({type:LOADING})}
+
+export const updateUser = (user) => {
+  console.log('should be updating user')
   return async (dispatch) => {
     dispatch({ type: LOADING })
+    delete user.picture
+    dispatch({ type: UPDATE_PROFILE, payload: user })
     try {
-      const response = await api.profile.get(profile)
+      //update firebase here. Should actually be before profile stuff
     } catch (error) {
       console.log(`error updating profile: ${error.message}`)
-      dispatch({ type: UPDATE_PROFILE, payload: { profile } })
     }
   }
 }

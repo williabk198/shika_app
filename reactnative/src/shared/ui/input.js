@@ -23,11 +23,12 @@ export const Input = ({ label, value, onChangeText, placeholder, secureTextEntry
         placeholder={placeholder}
         autoCorrect={false}
         style={{
+          paddingTop: 0,
           color: '#000',
-          paddingRight: 5,
-          paddingLeft: 1,
+          paddingRight: 15,
+          paddingLeft: 15,
           fontSize: 15,
-          lineHeight: 23,
+          lineHeight: 15,
           width: dim.width
         }}
         value={value}

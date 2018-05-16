@@ -8,17 +8,21 @@
   },
   "dependencies": {
     "firebase": "^4.13.1",
+    "moment": "^2.22.1",
     "native-base": "^2.4.2",
     "react": "16.3.1",
     "react-native": "0.55.3",
     "react-native-elements": "^0.19.1",
     "react-native-facebook-login": "^1.6.1",
+    "react-native-firebase": "^4.1.0",
     "react-native-image-picker": "^0.26.7",
     "react-native-maps": "^0.21.0",
     "react-navigation": "^1.5.11",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
+    "redux-devtools-extension": "^2.13.2",
     "redux-persist": "^4.9.1",
+    "redux-thunk": "^2.2.0",
     "store": "^2.0.12"
   },
   "devDependencies": {
